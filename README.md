@@ -5,6 +5,9 @@ Kelompok 1 Platinum
 - Vieri
 - Aditya
 
+Link Challange 
+https://docs.google.com/presentation/d/1xs-x1j74NrN867xXdRiQm6_Q3q9Aj4LSO2CvsR9bi08/edit#slide=id.g12574b64373_5_0
+
 Require Project Platinum 
 - Design Pattern (Model - Controller - Router)
 - Auth (JWT)
@@ -14,4 +17,5 @@ Require Project Platinum
 - Unit test (JEST)
 - websocket (socket.io)
 - File Manager/ save image
-- 
+
+
