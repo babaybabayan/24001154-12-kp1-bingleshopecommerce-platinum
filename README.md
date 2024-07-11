@@ -17,6 +17,3 @@ Require Project Platinum
 - Unit test (JEST)
 - websocket (socket.io)
 - File Manager/ save image
-
-
-asdasdjhakjshdkjashdsa
