@@ -1,0 +1,21 @@
+{
+  "name": "24001154-12-kp1-bingleshopecommerce-platinum",
+  "version": "1.0.0",
+  "description": "Kelompok 1 Platinum\r - Han\r - Akbar\r - Vieri\r - Aditya",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "sequelize-cli": "^6.6.2"
+  }
+}
