@@ -4,7 +4,7 @@
   "description": "Kelompok 1 Platinum\r - Han\r - Akbar\r - Vieri\r - Aditya",
   "main": "app.js",
   "scripts": {
-    "start": "npm run app.js"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
