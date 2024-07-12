@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
+const AppResponseDto = require('../utils/app_reponse.dto');
+
 const checkToken = expressJwt({secret: process.env.JWT_SECRET || 'JWT_SUPER_SECRET', userProperty: 'decodedJwt'});
 
 const User = require('../config/sequelize.config').User;
