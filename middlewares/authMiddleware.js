@@ -8,7 +8,7 @@ const checkToken = expressJwt({secret: process.env.JWT_SECRET || 'JWT_SUPER_SECR
 const User = require('../config/sequelize.config').User;
 const Role = require('../config/sequelize.config').Role;
 
-const readToken = function (req, res, next) {
+const readToken = (req, res, next) => {
     // if the loadoUser middleware has already laoded the user then no need to reload it again
     if (req.user != null)
         return next();
