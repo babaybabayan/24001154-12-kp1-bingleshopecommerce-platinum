@@ -12,7 +12,7 @@ app.use("/api/items", itemRoutes);
 
 // TODO:- WIll delete letter
 app.post("/login", (req, res, next) => {
-  const token = signToken(1);
+  const token = signToken(req.body);
   return res.json({ token: token });
 });
 

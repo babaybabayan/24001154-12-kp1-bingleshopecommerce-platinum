@@ -7,19 +7,30 @@ const process = require("process");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
+
+const dialect = process.env.DB_DIALECT || config.dialect || "sqlite";
+const database = process.env.DB_DATABSE || config.database || "database";
+const username = process.env.DB_USERNAME || config.username || "root";
+const password = process.env.DB_PASSWORD || config.password || "root";
+const host = process.env.DB_HOST || config.host || "localhost";
+
+const connectionObject = {
+  host: host, 
+  dialect,
+  pool: {
+    max: process.env.DB_POOL_MAX | 5,
+    min: process.env.DB_POOL_MIN | 1,
+    acquire: process.env.DB_POOL_ACQUIRE | 30000,
+    idle: process.env.DB_POOL_IDLE | 10000,
+  },
+};
+
+if (dialect === "sqlite")
+  connectionObject.storage = config.storage || "./app.db";
+
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-  );
-}
+let sequelize = new Sequelize(database, username, password, connectionObject)
 
 fs.readdirSync(__dirname)
   .filter((file) => {

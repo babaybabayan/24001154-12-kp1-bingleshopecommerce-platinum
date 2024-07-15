@@ -99,8 +99,8 @@ exports.isAuthenticated = (req, res, next) => {
   );
 };
 
-exports.signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET || "JWT_SUPER_SECRET", {
+exports.signToken = (user) => {
+  return jwt.sign(user, process.env.JWT_SECRET_KEY || "JWT_SUPER_SECRET", {
     expiresIn: process.env.JWT_EXPIRE_TIME || 30000,
   });
 };
