@@ -1,12 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { expressjwt: expressjwt } = require("express-jwt");
 const AppResponseDto = require("../utils/app_reponse.dto");
-
-const checkToken = expressjwt({
-  secret: process.env.JWT_SECRET_KEY || "JWT_SUPER_SECRET",
-  algorithms: ["HS256"],
-});
 
 // TODO: - Need Implement after user table ready
 // const User = require("../config/sequelize.config").User;
@@ -30,15 +24,6 @@ const readToken = (req, res, next) => {
       req.user = user;
       next();
     });
-
-    // checkToken(req, res, (err) => {
-    //   if (err) {
-    //     return res
-    //       .status(409)
-    //       .json(AppResponseDto.buildWithErrorMessages(err.name));
-    //   }
-    //   next();
-    // });
   } else {
     return next();
   }
