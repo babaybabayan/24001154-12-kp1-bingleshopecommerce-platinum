@@ -3,8 +3,7 @@ const app = express();
 const PORT = 3000;
 
 const itemRoutes = require("./routes/ItemRoutes");
-const { generateAccessToken } = require("./generateSecretKey");
-const { signToken } = require("./middlewares/AuthMiddleware");
+const { signToken } = require("./utils/GenerateToken");
 
 app.use(express.json());
 

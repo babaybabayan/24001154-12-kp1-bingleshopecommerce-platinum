@@ -1,54 +1,37 @@
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const AppResponseDto = require("../utils/app_reponse.dto");
+
+const AppResponseDto = require("../dtos/app_reponse.dto");
+const { verifyToken } = require("../utils/VerifyToken");
 
 // TODO: - Need Implement after user table ready
 // const User = require("../config/sequelize.config").User;
 // const Role = require("../config/sequelize.config").Role;
 
-const readToken = (req, res, next) => {
+const readToken = async (req, res, next) => {
   // if the loadoUser middleware has already laoded the user then no need to reload it again
   const authHeader = req.headers.authorization;
   const isHaveBearer = req.headers.authorization.split(" ")[0] === "Bearer";
   const token = req.headers.authorization.split(" ")[1];
 
-  console.log(req.user);
   if (req.user != null) return next();
   if (authHeader && isHaveBearer) {
-    jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, user) => {
-      if (err) {
-        return res
-          .status(409)
-          .json(AppResponseDto.buildWithErrorMessages(err.name));
-      }
-      req.user = user;
+    try {
+      const verifyUser = await verifyToken(token, process.env.JWT_SECRET_KEY);
+      req.user = verifyUser;
       next();
-    });
+    } catch (error) {
+      return res
+        .status(409)
+        .json(AppResponseDto.buildWithErrorMessages(err.name));
+    }
   } else {
     return next();
   }
 };
 
-exports.isAdmin = (req, res, next) => {
-  if (req.user === null)
-    return res.json(
-      AppResponseDto.buildWithErrorMessages(
-        "Access denied, you re not Logged In"
-      )
-    );
-
-  if (req.user.roles.some((role) => role.name === "ROLE_ADMIN")) next();
-  else
-    return res.json(
-      AppResponseDto.buildWithErrorMessages(
-        "Access denied, you re not an Author"
-      )
-    );
-};
-
 const getFreshUser = (required) => {
   return (req, res, next) => {
-    console.log(req.decodedJwt);
+    console.log(req.user);
     if (req.user == null || req.user.email == null) {
       if (required)
         // no jwt, and it is required
@@ -99,25 +82,5 @@ exports.isAuthenticated = (req, res, next) => {
   );
 };
 
-exports.signToken = (user) => {
-  return jwt.sign(user, process.env.JWT_SECRET_KEY || "JWT_SUPER_SECRET", {
-    expiresIn: process.env.JWT_EXPIRE_TIME || 30000,
-  });
-};
-
 exports.mustBeAuthenticated = [readToken, getFreshUser(true)];
 exports.loadUser = [readToken, getFreshUser(false)];
-
-exports.userOwnsItOrIsAdmin = (req, res, next) => {
-  if (
-    req.user != null &&
-    (req.user.isAdminSync() || req.userOwnable.userId === req.user.id)
-  )
-    next();
-  else
-    return res.json(
-      AppResponseDto.buildWithErrorMessages(
-        "This resource does not belong to you"
-      )
-    );
-};

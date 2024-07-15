@@ -1,6 +1,6 @@
 const { Item } = require("../models");
 var _ = require("lodash");
-const AppReponseDto = require("../utils/app_reponse.dto");
+const AppReponseDto = require("../dtos/app_reponse.dto");
 const ItemDto = require("../dtos/request/ItemRequestDto");
 const { buildItem } = require("../dtos/reponse/ItemResponseDto");
 
