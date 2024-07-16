@@ -22,7 +22,7 @@ const readToken = async (req, res, next) => {
     } catch (error) {
       return res
         .status(409)
-        .json(AppResponseDto.buildWithErrorMessages(err.name));
+        .json(AppResponseDto.buildWithErrorMessages(error.name));
     }
   } else {
     return next();
