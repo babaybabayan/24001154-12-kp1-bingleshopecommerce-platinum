@@ -8,7 +8,7 @@ exports.isAdmin = (req, res, next) => {
       )
     );
 
-  if (req.user.roles.some((role) => role.name === "ROLE_ADMIN")) next();
+  if (req.user.role === "ROLE_ADMIN") next();
   else
     return res.json(
       AppResponseDto.buildWithErrorMessages(
