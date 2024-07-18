@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
-=======
-const express = require("express");
->>>>>>> develop
 const app = express();
 const PORT = 3000;
 
