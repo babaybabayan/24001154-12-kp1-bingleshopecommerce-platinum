@@ -4,12 +4,14 @@ const PORT = 3000;
 
 const itemRoutes = require("./routes/ItemRoutes");
 const userRoutes = require("./routes/UserRoutes");
+const orderRoutes = require('./routes/orderRoutes');
 const { signToken } = require("./utils/GenerateToken");
 
 app.use(express.json());
 
 app.use("/api/items", itemRoutes);
 app.use("/api/users", userRoutes);
+app.use('/api/orders', orderRoutes);
 
 // TODO:- WIll delete letter
 app.post("/login", (req, res, next) => {
