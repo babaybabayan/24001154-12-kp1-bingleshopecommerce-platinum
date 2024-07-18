@@ -3,8 +3,8 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = {
     openapi: '3.0.0',
     info: {
-        title: 'bingle API',
-        version: '2.0.1',
+        title: 'bingle shop API',
+        version: '1.0.0',
         description: 'bingle shop API documentation',
     }
     
