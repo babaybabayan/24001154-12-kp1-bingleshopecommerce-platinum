@@ -41,6 +41,10 @@ class ItemService {
 
   async update(id, item) {
     try {
+      let existingItem = await this.itemRepository.getItemById(id);
+      if (!existingItem) {
+        return { status: 400, message: "Data Not Found" };
+      }
       await this.itemRepository.update(id, item);
       return { status: 201, items: "Item Updated" };
     } catch (error) {

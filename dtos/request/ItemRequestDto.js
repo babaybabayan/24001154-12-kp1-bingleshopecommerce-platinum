@@ -24,11 +24,7 @@ exports.createRequestItem = (req) => {
   } else {
     bindingResult.errors.stock = "stock cannot be empty";
   }
-  if (req.imageUrl) {
-    bindingResult.validatedData.imageUrl = req.imageUrl;
-  } else {
-    bindingResult.errors.imageUrl = "image cannot be empty";
-  }
+  bindingResult.validatedData.imageUrl = req.imageUrl;
 
   return bindingResult;
 };
