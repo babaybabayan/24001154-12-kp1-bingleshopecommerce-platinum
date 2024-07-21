@@ -19,6 +19,11 @@ exports.createRequestItem = (req) => {
   } else {
     bindingResult.errors.price = "price cannot be empty";
   }
+  if (req.stock) {
+    bindingResult.validatedData.stock = req.stock;
+  } else {
+    bindingResult.errors.stock = "stock cannot be empty";
+  }
   if (req.imageUrl) {
     bindingResult.validatedData.imageUrl = req.imageUrl;
   } else {
