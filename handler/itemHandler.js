@@ -22,7 +22,7 @@ class ItemHandler {
   async update(req, res) {
     const id = req.params.id;
     const payload = req.body;
-    const serviceResponse = await itemService.update(id, payload);
+    const serviceResponse = await this.itemService.update(id, payload);
     return res.status(serviceResponse.status).send(serviceResponse);
   }
 
@@ -34,7 +34,7 @@ class ItemHandler {
 
   async create(req, res) {
     const payload = req.body;
-    const serviceResponse = await this.itemService.createRequestItem(payload);
+    const serviceResponse = await this.itemService.create(payload);
     return res.status(serviceResponse.status).send(serviceResponse);
   }
 }

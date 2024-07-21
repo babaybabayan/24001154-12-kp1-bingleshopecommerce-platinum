@@ -4,23 +4,23 @@ exports.createRequestItem = (req) => {
     errors: {},
   };
 
-  if (req.body.name) {
-    bindingResult.validatedData.name = req.body.name;
+  if (req.name) {
+    bindingResult.validatedData.name = req.name;
   } else {
     bindingResult.errors.name = "name cannot be empty";
   }
-  if (req.body.description) {
-    bindingResult.validatedData.description = req.body.description;
+  if (req.description) {
+    bindingResult.validatedData.description = req.description;
   } else {
     bindingResult.errors.name = "description cannot be empty";
   }
-  if (req.body.price) {
-    bindingResult.validatedData.price = req.body.price;
+  if (req.price) {
+    bindingResult.validatedData.price = req.price;
   } else {
     bindingResult.errors.price = "price cannot be empty";
   }
-  if (req.body.imageUrl) {
-    bindingResult.validatedData.imageUrl = req.body.imageUrl;
+  if (req.imageUrl) {
+    bindingResult.validatedData.imageUrl = req.imageUrl;
   } else {
     bindingResult.errors.imageUrl = "image cannot be empty";
   }
