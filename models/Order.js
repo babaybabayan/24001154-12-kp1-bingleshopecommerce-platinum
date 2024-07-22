@@ -1,55 +1,64 @@
-'use strict';
-module.exports = {
-    up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('orders', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-            userId: {
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'users',
-                    key: 'id'
-                },
-                onDelete: 'CASCADE'
-            },
-            itemId: {
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'items',
-                    key: 'id'
-                },
-                onDelete: 'CASCADE'
-            },
-            quantity: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            totalPrice: {
-                type: Sequelize.DECIMAL(10, 2),
-                allowNull: false
-            },
-            status: {
-                type: Sequelize.STRING(20),
-                allowNull: false,
-                defaultValue: 'pending'
-            },
-            createdAt: {
-                allowNull: false,
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-            },
-            updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-            }
-        });
-    },
-    down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('orders');
+"use strict";
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
+  class Order extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      Order.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as: "user",
+      });
+      Order.belongsTo(models.Item, {
+        foreignKey: "item_id",
+        as: "item",
+      });
     }
+  }
+
+  Order.init(
+    {
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+      },
+      item_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Items",
+          key: "id",
+        },
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      total_price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "pending",
+      },
+    },
+    {
+      sequelize,
+      modelName: "Order",
+      underscored: false,
+    }
+  );
+
+  return Order;
 };
