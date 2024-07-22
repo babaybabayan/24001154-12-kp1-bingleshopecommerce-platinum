@@ -21,8 +21,8 @@ const readToken = async (req, res, next) => {
       next();
     } catch (error) {
       return res
-        .status(409)
-        .json(AppResponseDto.buildWithErrorMessages(error.name));
+        .status(401)
+        .json(AppResponseDto.buildWithErrorMessages(error.name, 401));
     }
   } else {
     return next();
@@ -31,7 +31,6 @@ const readToken = async (req, res, next) => {
 
 const getFreshUser = (required) => {
   return (req, res, next) => {
-    console.log(req.user);
     if (req.user == null || req.user.email == null) {
       if (required)
         // no jwt, and it is required
