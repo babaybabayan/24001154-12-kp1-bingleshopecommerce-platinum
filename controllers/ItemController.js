@@ -8,7 +8,6 @@ class ItemController {
   async index(req, res) {
     const items = await Item.findAll();
     const populateItem = items.map((item) => {
-      console.log(item);
       return buildItem(item);
     });
     return res.json(AppReponseDto.buildSuccessWithDto(populateItem));

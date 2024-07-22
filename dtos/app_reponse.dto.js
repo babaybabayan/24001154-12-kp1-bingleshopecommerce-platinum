@@ -12,7 +12,7 @@ exports.buildSuccessWithMessages = (messages) => {
   return response;
 };
 
-exports.buildWithErrorMessages = (messages) => {
+exports.buildWithErrorMessages = (messages, statusCode) => {
   let response = { success: false };
   response.errors = [];
   if (typeof messages === "string") response.message = [messages];
@@ -25,10 +25,11 @@ exports.buildWithErrorMessages = (messages) => {
     response.errors = messages;
     response.message = Object.values(messages);
   }
+  response.statusCode = statusCode || 500;
   return response;
 };
 
-function populateResponseWithMessages(response, success, messages) {
+function populateResponseWithMessages(response, success, messages, statusCode) {
   if (response === null) response = {};
 
   response.success = !!success;
@@ -37,12 +38,12 @@ function populateResponseWithMessages(response, success, messages) {
   else if (messages instanceof Array) response.message = messages;
   else if (messages instanceof Object)
     response.message = Object.values(messages);
-
+  response.statusCode = statusCode || 200;
   return response;
 }
 
-exports.buildWithDtoAndMessages = (dto, messages) => {
-  return populateResponseWithMessages(dto, true, messages);
+exports.buildWithDtoAndMessages = (dto, messages, statusCode) => {
+  return populateResponseWithMessages(dto, true, messages, statusCode);
 };
 
 exports.buildSuccessWithDto = (dto) => {

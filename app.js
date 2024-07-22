@@ -1,6 +1,6 @@
-const express = require('express');
-const swaggerUI = require('swagger-ui-express');
-const swaggerSpec = require('./swagger');
+const express = require("express");
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 const app = express();
 const PORT = 3000;
 
@@ -9,8 +9,8 @@ const userRoutes = require("./routes/UserRoutes");
 const { signToken } = require("./utils/GenerateToken");
 
 app.use(express.json());
-app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerSpec));
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use("/api/items", itemRoutes);
 app.use("/api/users", userRoutes);
