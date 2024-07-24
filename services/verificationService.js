@@ -17,7 +17,7 @@ class VerificationService{
         }
     }
 
-    async save(user_id){
+    async save(user_id, mailCon){
         const token = this.generateRandomCode();
         try {
             const check = this.check(user_id);
@@ -27,6 +27,16 @@ class VerificationService{
             }else{
                 await this.verificationRepository.save(user_id, token);
             }
+            // Send email
+            const userQuery = await this.userRepository.find_by_id(user_id);
+            const mail = userQuery.email;
+            await mailCon.sendEmail({ 
+                from: "hanvir.dev@gmail.com", 
+                to: mail, 
+                subject: "Verifikasi Email", 
+                text: `Kode verifikasi anda adalah ${token}`,
+                html: `<p>Kode verifikasi anda adalah ${token}</p>` 
+            });
             return { status: 200, message: "Berhasil" };
         } catch (error) {
             return { status: 500, message: error.message };
