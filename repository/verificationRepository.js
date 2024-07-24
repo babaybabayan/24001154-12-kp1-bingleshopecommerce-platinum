@@ -1,4 +1,4 @@
-const { Verification, User } = require("../models");
+const { Verification } = require("../models");
 
 class VerificationRepository{
     constructor(){}
@@ -7,24 +7,16 @@ class VerificationRepository{
         return await Verification.findOne({ where: { user_id } });
     }
 
-    async save(user_id, token) {
-        const check = this.find({ where: { user_id } });
-        if(check){
-            await Verification.delete({ where: { user_id } });
-            return await Verification.create({ user_id, token });
-        }else{
-            return await Verification.create({ user_id, token });
-        }
+    async delete_with_id(user_id){
+        return await Verification.delete({ where: { user_id } });
     }
 
-    async verify(user_id, token){
-        const check = this.find({ where: { user_id } });
-        if(check){
-            await Verification.delete({ where: { user_id, token } });
-            return await User.update({ verified: true }, { where: { id: user_id } });
-        }else{
-            return false;
-        }
+    async delete_with_tid(user_id, token){
+        await Verification.delete({ where: { user_id, token } });
+    }
+
+    async save(user_id, token) {
+        return await Verification.create({ user_id, token });
     }
  
 }
