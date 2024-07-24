@@ -6,7 +6,7 @@ const PORT = 3000;
 
 const itemRoutes = require("./routes/ItemRoutes");
 const userRoutes = require("./routes/UserRoutes");
-const orderRoutes = require("./routes/orderRoutes");
+const orderRoutes = require("./routes/OrderRoutes");
 const verificationRoutes = require("./routes/VerificationRoutes");
 const { signToken } = require("./utils/GenerateToken");
 
