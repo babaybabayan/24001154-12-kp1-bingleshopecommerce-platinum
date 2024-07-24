@@ -40,7 +40,7 @@ class VerificationService{
                 await this.userRepository.verify(user_id);
                 await this.verificationRepository.delete_with_tid(user_id, token);
             }
-            return { status: 404, message: "Token not found" };
+            return { status: 200, message: "User verified" };
         } catch(error) {
             return { status: 500, message: error.message };
         }
