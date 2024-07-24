@@ -3,13 +3,14 @@ class UserHandler{
     constructor(userService, verificationService){
         this.userService = userService;
         this.verificationService = verificationService;
+        this.register = this.register.bind(this);
     }
 
     async register(req, res){
         const body = req.body;
         const register = await this.userService.register(body);
         await this.verificationService.save(register.id);
-        res.send(AppReponseDto.buildSuccessWithDto(register.status, register.message));
+        return res.sendStatus(AppReponseDto.buildSuccessWithDto(register.status, register.message));
     }
 
 }
