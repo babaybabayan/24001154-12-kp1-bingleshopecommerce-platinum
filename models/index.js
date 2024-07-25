@@ -9,7 +9,7 @@ const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 
 const dialect = process.env.DB_DIALECT || config.dialect || "sqlite";
-const database = process.env.DB_DATABSE || config.database || "database";
+const database = process.env.DB_DATABASE || config.database || "database";
 const username = process.env.DB_USERNAME || config.username || "root";
 const password = process.env.DB_PASSWORD || config.password || "root";
 const host = process.env.DB_HOST || config.host || "localhost";
