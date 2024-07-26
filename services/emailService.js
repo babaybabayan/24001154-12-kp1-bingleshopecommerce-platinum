@@ -9,12 +9,12 @@ class EmailService{
     async sendEmail(mailOptions) {
         // Create a transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "smtp-relay.brevo.com", // replace with your SMTP host
-            port: 587, // replace with your SMTP port
+            host: process.env.MAIL_HOST, // replace with your SMTP host
+            port: process.env.MAIL_PORT, // replace with your SMTP port
             secure: false, // false for port 587
             auth: {
-                user: "793e2e001@smtp-brevo.com", // replace with your email
-                pass: "qRmdwr45P8TM0Hvf", // replace with your email password
+                user: process.env.MAIL_LOGIN, // replace with your email
+                pass: process.env.MAIL_PASSWORD, // replace with your email password
             },
             tls: {
                 rejectUnauthorized: false,
