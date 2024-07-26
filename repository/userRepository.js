@@ -9,6 +9,10 @@ class UserRepository{
         return await user.findOne({ where: { email } });
     }
 
+    async find_by_id(id){
+        return await user.findOne({ where: { id } });
+    }
+
     async save(body){
         const save = await user.create({ 
             username : body.username,
