@@ -1,4 +1,4 @@
-const { Verification, user } = require("../models");
+const { user } = require("../models");
 
 class UserRepository{
     constructor(){
@@ -7,6 +7,14 @@ class UserRepository{
 
     async find(email){
         return await user.findOne({ where: { email } });
+    }
+
+    async find_by_empas(email, password){
+        return await user.findOne({ where: { 
+            email : email, 
+            password : password,
+            verified : true 
+        }});
     }
 
     async find_by_id(id){
@@ -23,8 +31,8 @@ class UserRepository{
         return { id: save.id };
     }
 
-    async verify(user_id){
-        return await user.update({ verified: true }, { where: { id: user_id } });
+    async verify(id){
+        return await user.update({ verified: true }, { where: { id } });
     }
 
 }
