@@ -3,6 +3,7 @@ const swaggerUI = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
 const app = express();
 const PORT = 3000;
+const socketio = require("socket.io");
 
 const itemRoutes = require("./routes/ItemRoutes");
 const userRoutes = require("./routes/UserRoutes");
@@ -11,6 +12,7 @@ const verificationRoutes = require("./routes/VerificationRoutes");
 const { signToken } = require("./utils/GenerateToken");
 
 app.use(express.json());
+
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
@@ -32,6 +34,20 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(PORT, function () {
-  console.log(`Server berjalan pada http://localhost:${PORT}`);
+const server = app.listen(PORT, function () {
+    console.log(`Server berjalan pada http://localhost:${PORT}`);
+  });
+
+const io = socketio(server);
+  io.on ('connection', (socket) => {
+    console.log('a user connected');
+
+  socket.on('chat message', (msg) =>{
+    console.log('message: ', msg);
+    io.emit('new chat', msg);
+  });
+
+  socket.on('disconnect', ()=>{
+    console.log('user disconnected');
+  });
 });
