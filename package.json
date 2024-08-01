@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "migrate": "npx sequelize-cli db:migrate",
-    "undo-migrate": "npx sequelize-cli db:migrate:undo",
+    "undo-migrate": "npx sequelize-cli db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all"
   },
   "author": "",

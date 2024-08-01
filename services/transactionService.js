@@ -5,12 +5,17 @@ class TransactionService {
     this.orderRepository = orderRepository;
   }
 
-  async createOrder(payload) {}
+  async createOrder(payload) {
+    try {
+      await this.orderRepository.insert(payload);
+      return { status: 200, message: "success" };
+    } catch (error) {
+      return { status: 409, message: error.message };
+    }
+  }
 
   async getOrderList() {
     try {
-      const orders = await this.orderRepository.getOrder();
-      console.log("🚀 ~ TransactionService ~ getOrderList ~ orders:", orders);
       const buildOrder = buildOrderDetail(orders);
       return { status: 200, order: buildOrder };
     } catch (error) {

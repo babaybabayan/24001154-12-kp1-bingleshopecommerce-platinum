@@ -13,6 +13,18 @@ class OrderDetailRepository {
       ],
     });
   }
+
+  async insert(payload) {
+    console.log("🚀 ~ OrderDetailRepository ~ insert ~ payload:", payload);
+    return await OrderDetail.create(payload, {
+      include: [
+        {
+          model: Order,
+          as: "orders",
+        },
+      ],
+    });
+  }
 }
 
 module.exports = OrderDetailRepository;

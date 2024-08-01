@@ -11,19 +11,5 @@ const transactionHandler = new TransactionHandler(transactionService);
 const { OrderDetail, Order, Item, user } = require("../models");
 
 router.get("/", transactionHandler.index);
-
-router.post("/", (req, res) => {
-  const { payload } = req.body;
-});
-
-router.get("/user", (req, res) => {
-  user
-    .findAll({ include: { model: OrderDetail } })
-    .then((user) => {
-      return res.json({ user });
-    })
-    .catch((err) => {
-      return res.json(err.message);
-    });
-});
+router.post("/", transactionHandler.create);
 module.exports = router;

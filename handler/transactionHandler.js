@@ -13,15 +13,16 @@ class TransactionHandler {
   }
 
   async create(req, res) {
-    const { payload } = req.body;
+    const payload = req.body;
     const response = await this.transactionService.createOrder(payload);
-    return res.status(response.status).send(response.order);
+    return res.status(response.status).send(response.message);
   }
 
   async update(req, res) {
-    const { payload } = req.body;
-    const response = await this.transactionService.update(payload);
-    return res.status(response.status).send(response);
+    // todo
+    // const { payload } = req.body;
+    // const response = await this.transactionService.update(payload);
+    // return res.status(response.status).send(response);
   }
 }
 
