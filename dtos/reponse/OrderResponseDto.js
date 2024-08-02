@@ -17,12 +17,12 @@ exports.buildOrderDetail = (orderDetail) => {
       transactionNo: detail.transactionId,
       username: detail.user.username,
       status: detail.status,
-      order: builOrder(detail.orders),
+      order: builItemOrder(detail.orders),
     };
   });
 };
 
-function builOrder(order) {
+function builItemOrder(order) {
   return order.map((order) => {
     return {
       item: order.item.name,
