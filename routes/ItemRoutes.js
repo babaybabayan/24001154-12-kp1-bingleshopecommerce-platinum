@@ -12,10 +12,25 @@ const itemRepository = new ItemRepository();
 const itemService = new ItemService(itemRepository);
 const itemHandler = new ItemHandler(itemService);
 
-router.get("/", mustBeAuthenticated, itemHandler.getAllItem);
-router.get("/:id", mustBeAuthenticated, itemHandler.getItemById);
-router.put("/:id", mustBeAuthenticated, isAdmin, itemHandler.update);
-router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
+/**
+ * @swagger
+ * /items:
+ *   get:
+ *     description: Retrieve the full list of stocks
+ *     tags:
+ *       - Get All Items
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: get All Items
+ *         schema:
+ *           $ref: '#/definitions/items'
+ */
+router.get("/", itemHandler.getAllItem);
+router.get("/:id", itemHandler.getItemById);
+router.put("/:id", itemHandler.update);
+router.delete("/:id", itemHandler.delete);
 router.post(
   "/",
   mustBeAuthenticated,

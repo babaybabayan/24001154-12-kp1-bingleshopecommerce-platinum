@@ -1,5 +1,6 @@
 "use strict";
 const crypto = require("crypto");
+const { USER_ROLE } = require("../utils/Constants");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -19,8 +20,8 @@ module.exports = {
           username: "akbar",
           email: "akbar@binar.com",
           password: crypto.createHash("md5").update("binar123").digest("hex"),
-          role: "Admin",
-          verified: false,
+          role: USER_ROLE.isAdmin,
+          verified: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -28,7 +29,7 @@ module.exports = {
           username: "hanvir",
           email: "hanvir@binar.com",
           password: crypto.createHash("md5").update("binar123").digest("hex"),
-          role: "User",
+          role: USER_ROLE.isAdmin,
           verified: false,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -37,7 +38,7 @@ module.exports = {
           username: "adit",
           email: "aditya@binar.com",
           password: crypto.createHash("md5").update("binar123").digest("hex"),
-          role: "Admin",
+          role: USER_ROLE.isUser,
           verified: false,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -46,7 +47,7 @@ module.exports = {
           username: "vieri",
           email: "vieri@binar.com",
           password: crypto.createHash("md5").update("binar123").digest("hex"),
-          role: "User",
+          role: USER_ROLE.none,
           verified: false,
           createdAt: new Date(),
           updatedAt: new Date(),

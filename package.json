@@ -7,7 +7,8 @@
     "start": "nodemon app.js",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migrate": "npx sequelize-cli db:migrate:undo:all",
-    "seed": "npx sequelize-cli db:seed:all"
+    "seed": "npx sequelize-cli db:seed:all",
+    "undo-seed": "npx sequelize-cli db:seed:undo:all"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.3",
     "swagger-jsdoc": "^6.2.8",
+    "swagger-model-validator": "^3.0.21",
     "swagger-ui-express": "^5.0.1",
     "uuid": "^10.0.0"
   },
