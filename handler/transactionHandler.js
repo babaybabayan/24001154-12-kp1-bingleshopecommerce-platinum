@@ -4,7 +4,7 @@ class TransactionHandler {
     this.transactionService = transactionService;
     this.index = this.index.bind(this);
     this.create = this.create.bind(this);
-    this.update = this.update.bind(this);
+    this.execute = this.execute.bind(this);
   }
 
   async index(req, res) {
@@ -18,11 +18,10 @@ class TransactionHandler {
     return res.status(response.status).send(response.message);
   }
 
-  async update(req, res) {
-    // todo
-    // const { payload } = req.body;
-    // const response = await this.transactionService.update(payload);
-    // return res.status(response.status).send(response);
+  async execute(req, res) {
+    const payload = req.body;
+    const response = await this.transactionService.execute(payload);
+    return res.status(response.status).send(response);
   }
 }
 

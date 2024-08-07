@@ -1,25 +1,25 @@
 const express = require("express");
-const swaggerUI = require("swagger-ui-express");
-const swaggerSpec = require("./swagger");
-const app = express();
-const PORT = 3000;
-
+const morgan = require("morgan");
 const itemRoutes = require("./routes/ItemRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const orderRoutes = require("./routes/OrderRoutes");
 const verificationRoutes = require("./routes/VerificationRoutes");
 const orderDetailRoutes = require("./routes/TransactionRoutes");
+const swaggerRoutes = require("./routes/swaggerRoutes");
 const { signToken } = require("./utils/GenerateToken");
 
-app.use(express.json());
+const app = express();
+const PORT = 3000;
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+app.use(express.json());
+app.use(morgan("combined"));
 
 app.use("/api/items", itemRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/verification", verificationRoutes);
 app.use("/api/order-detail", orderDetailRoutes);
+app.use("/api/docs", swaggerRoutes);
 
 // TODO:- WIll delete letter
 app.post("/login", (req, res, next) => {

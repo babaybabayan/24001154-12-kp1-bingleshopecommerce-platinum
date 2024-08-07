@@ -14,8 +14,21 @@ class OrderDetailRepository {
     });
   }
 
+  async getOrderBy(transactionId) {
+    return await OrderDetail.findOne({
+      where: transactionId,
+      include: [
+        { model: user },
+        {
+          model: Order,
+          as: "orders",
+          include: { model: Item, right: true, as: "item" },
+        },
+      ],
+    });
+  }
+
   async insert(payload) {
-    console.log("🚀 ~ OrderDetailRepository ~ insert ~ payload:", payload);
     return await OrderDetail.create(payload, {
       include: [
         {
@@ -24,6 +37,10 @@ class OrderDetailRepository {
         },
       ],
     });
+  }
+
+  async update(transactionId, orderDetail) {
+    return await OrderDetail.update(orderDetail, { where: transactionId });
   }
 }
 

@@ -55,7 +55,6 @@ class ItemService {
   async create(item) {
     try {
       const bindingRequest = ItemDto.createRequestItem(item);
-      console.log(bindingRequest);
       if (!_.isEmpty(bindingRequest.errors)) {
         return { status: 409, messages: bindingRequest.errors };
       }

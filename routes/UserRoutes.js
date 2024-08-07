@@ -7,15 +7,21 @@ const UserService = require("../services/userService");
 const UserHandler = require("../handler/userHandler");
 const EmailService = require("../services/emailService");
 
-const { mustBeAuthenticated } = require("../middlewares/AuthMiddleware");
-
 const userRepository = new UserRepository();
 const verificationRepository = new VerificationRepository();
 const userService = new UserService(userRepository);
 const emailService = new EmailService();
-const verificationService = new VerificationService(verificationRepository, userRepository);
-const userHandler = new UserHandler(userService, verificationService, emailService);
+const verificationService = new VerificationService(
+  verificationRepository,
+  userRepository
+);
+const userHandler = new UserHandler(
+  userService,
+  verificationService,
+  emailService
+);
 
-router.post("/register", userHandler.register)
+router.post("/register", userHandler.register);
+router.post("/login", userHandler.login);
 
 module.exports = router;
