@@ -35,6 +35,14 @@ class UserRepository {
     return { id: save.id };
   }
 
+    async delete_by_email(email) {
+        await user.destroy({
+            where: {
+                email: email,
+            },
+        });
+    }
+
   async verify(id) {
     return await user.update({ verified: true }, { where: { id } });
   }

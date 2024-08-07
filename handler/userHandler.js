@@ -19,7 +19,7 @@ class UserHandler {
     const register = await this.userService.register(body);
     if (register.status === 500) {
       return res.sendStatus(
-        AppReponseDto.buildErrorWithDto(register.status, register.message)
+        AppReponseDto.buildWithErrorMessages(register.status, register.message)
       );
     }
     await this.verificationService.save(register.id, this.emailService);

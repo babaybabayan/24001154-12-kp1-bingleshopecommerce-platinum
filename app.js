@@ -34,6 +34,4 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(PORT, function () {
-  console.log(`Server berjalan pada http://localhost:${PORT}`);
-});
+module.exports = app;
