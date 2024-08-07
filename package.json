@@ -4,6 +4,7 @@
   "description": "Kelompok 1 Platinum\r - Han\r - Akbar\r - Vieri\r - Aditya",
   "main": "app.js",
   "scripts": {
+    "test": "jest --watchAll",
     "start": "nodemon server.js",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migrate": "npx sequelize-cli db:migrate:undo:all",

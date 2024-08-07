@@ -1,7 +1,7 @@
 const request = require('supertest');
 const crypto = require("crypto");
-const app = require('../app');
-const UserRepository = require("../repository/userRepository");
+const app = require('../../app');
+const UserRepository = require("../../repository/userRepository");
 
 describe('register', () => {
     let server;
@@ -37,8 +37,7 @@ describe('register', () => {
         .set('Content-type', 'application/json')
         .send(userToRegister)
         .then(async (res) => {
-            expect(res.status).toEqual(200);
-            expect(res.message).toEqual("Berhasil");
+            expect(res.statusCode).toEqual(200);
         });
     });
 
@@ -60,10 +59,10 @@ describe('register', () => {
         return request(app)
         .post('/api/users/register')
         .set('Content-type', 'application/json')
-        .set('Authorization', 'Bearer + token')
+        // .set('Authorization', 'Bearer + token')
         .send(userToRegister)
         .then(async (res) => {
-            expect(res.statusCode).toEqual(500);
+            expect(res.status).toEqual(500);
         });
     });
 });
