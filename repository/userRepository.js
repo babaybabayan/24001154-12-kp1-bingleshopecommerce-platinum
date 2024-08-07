@@ -35,6 +35,14 @@ class UserRepository{
         return await user.update({ verified: true }, { where: { id } });
     }
 
+    async delete_by_email(email) {
+        await user.destroy({
+            where: {
+                email: email,
+            },
+        });
+    }
+
 }
 
 module.exports = UserRepository;
