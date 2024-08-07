@@ -30,10 +30,16 @@ const itemHandler = new ItemHandler(itemService, cloudService);
  *         schema:
  *           $ref: '#/definitions/items'
  */
-router.get("/", itemHandler.getAllItem);
-router.get("/:id", itemHandler.getItemById);
-router.put("/:id", itemHandler.update);
-router.delete("/:id", itemHandler.delete);
-router.post("/", memoryStorage.single("image"), itemHandler.create);
+router.get("/", mustBeAuthenticated, itemHandler.getAllItem);
+router.get("/:id", mustBeAuthenticated, itemHandler.getItemById);
+router.put("/:id", mustBeAuthenticated, isAdmin, itemHandler.update);
+router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
+router.post(
+  "/",
+  mustBeAuthenticated,
+  isAdmin,
+  memoryStorage.single("image"),
+  itemHandler.create
+);
 
 module.exports = router;

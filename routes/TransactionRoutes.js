@@ -4,6 +4,7 @@ const OrderDetailRepository = require("../repository/OrderDetailRepository");
 const ItemDetailRepository = require("../repository/itemRepository");
 const TransactionService = require("../services/transactionService");
 const TransactionHandler = require("../handler/transactionHandler");
+const { isAdmin } = require("../middlewares/RoleMiddleware");
 
 const orderDetailRepository = new OrderDetailRepository();
 const itemRepository = new ItemDetailRepository();
@@ -13,7 +14,12 @@ const transactionService = new TransactionService(
 );
 const transactionHandler = new TransactionHandler(transactionService);
 
-router.get("/", transactionHandler.index);
-router.post("/", transactionHandler.create);
-router.post("/execution", transactionHandler.execute);
+router.get("/", mustBeAuthenticated, isAdmin, transactionHandler.index);
+router.post("/", mustBeAuthenticated, transactionHandler.create);
+router.post(
+  "/execution",
+  mustBeAuthenticated,
+  isAdmin,
+  transactionHandler.execute
+);
 module.exports = router;
