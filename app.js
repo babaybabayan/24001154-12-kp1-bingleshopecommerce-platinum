@@ -1,7 +1,5 @@
 const express = require("express");
-const app = express();
-const PORT = 3000;
-
+const morgan = require("morgan");
 const itemRoutes = require("./routes/ItemRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const orderRoutes = require("./routes/OrderRoutes");
@@ -10,7 +8,11 @@ const orderDetailRoutes = require("./routes/TransactionRoutes");
 const swaggerRoutes = require("./routes/swaggerRoutes");
 const { signToken } = require("./utils/GenerateToken");
 
+const app = express();
+const PORT = 3000;
+
 app.use(express.json());
+app.use(morgan("combined"));
 
 app.use("/api/items", itemRoutes);
 app.use("/api/users", userRoutes);
