@@ -2,7 +2,6 @@ const router = require("express").Router();
 
 const { mustBeAuthenticated } = require("../middlewares/AuthMiddleware");
 const { isAdmin } = require("../middlewares/RoleMiddleware");
-const { setUploadPath } = require("../middlewares/UploadMiddleware");
 const ItemRepository = require("../repository/itemRepository");
 const ItemService = require("../services/itemService");
 const CloudService = require("../services/CloudinaryService");

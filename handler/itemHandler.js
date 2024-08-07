@@ -35,9 +35,9 @@ class ItemHandler {
 
   async create(req, res) {
     const payload = req.body;
-    const image_url = this.cloudService.uploadImage(req);
-    if (image_url) {
-      payload.imageUrl = image_url;
+    const cloudinary = await this.cloudService.uploadImage(req);
+    if (cloudinary.status === 200) {
+      payload.imageUrl = cloudinary.image_url.secure_url;
     }
     const serviceResponse = await this.itemService.create(payload);
     return res.status(serviceResponse.status).send(serviceResponse);

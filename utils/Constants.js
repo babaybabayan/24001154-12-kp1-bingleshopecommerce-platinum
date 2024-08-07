@@ -9,3 +9,7 @@ exports.STATUS = {
   inProgress: "INPROGRESS",
   pending: "FAILED",
 };
+
+exports.STATUS_UPLOAD = {
+  notDefine: "cloudinary is not defined",
+};
