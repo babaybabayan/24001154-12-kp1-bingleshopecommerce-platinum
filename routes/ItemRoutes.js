@@ -29,10 +29,42 @@ const itemHandler = new ItemHandler(itemService, cloudService);
  *         schema:
  *           $ref: '#/definitions/items'
  */
-router.get("/", mustBeAuthenticated, itemHandler.getAllItem);
+router.get("/", itemHandler.getAllItem);
 router.get("/:id", mustBeAuthenticated, itemHandler.getItemById);
 router.put("/:id", mustBeAuthenticated, isAdmin, itemHandler.update);
 router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
+/**
+ * @swagger
+ * /items:
+ *  post:
+ *    tags:
+ *      - Create Item
+ *    summary: Create Item
+ *    description: Create Item
+ *    produces:
+ *      - application/json
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - email
+ *              - password
+ *            properties:
+ *              email:
+ *                type: string
+ *                default: akbar@gmail.com
+ *              password:
+ *                type: string
+ *                default: akbar1234
+ *    responses:
+ *      200:
+ *        description: Successful operation
+ *        schema:
+ *          $ref: '#/definitions/login'
+ */
 router.post(
   "/",
   mustBeAuthenticated,

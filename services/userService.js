@@ -42,7 +42,6 @@ class UserService {
           message: "Login Succes",
           username: user.username,
           token: generatedToken,
-          role: user.role,
         };
         return { userWithToken };
       } else {

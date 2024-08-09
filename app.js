@@ -14,8 +14,8 @@ const PORT = 3000;
 app.use(express.json());
 app.use(morgan("combined"));
 
-app.use("/api/items", itemRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/items", itemRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/verification", verificationRoutes);
 app.use("/api/order-detail", orderDetailRoutes);

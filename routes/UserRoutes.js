@@ -22,6 +22,39 @@ const userHandler = new UserHandler(
 );
 
 router.post("/register", userHandler.register);
+
+/**
+ * @swagger
+ * /users/login:
+ *  post:
+ *    tags:
+ *      - login
+ *    summary: Login User
+ *    description: Login User
+ *    produces:
+ *      - application/json
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - email
+ *              - password
+ *            properties:
+ *              email:
+ *                type: string
+ *                default: akbar@gmail.com
+ *              password:
+ *                type: string
+ *                default: akbar1234
+ *    responses:
+ *      200:
+ *        description: Successful operation
+ *        schema:
+ *          $ref: '#/definitions/login'
+ */
 router.post("/login", userHandler.login);
 
 module.exports = router;
