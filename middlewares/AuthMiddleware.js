@@ -38,7 +38,7 @@ const readToken = async (req, res, next) => {
 
 const getFreshUser = (required) => {
   return (req, res, next) => {
-    if (req.user == null || req.user.email == null) {
+    if (req.user.user == null || req.user.email == null) {
       if (required)
         // no jwt, and it is required
         return res.json(
@@ -77,7 +77,7 @@ const getFreshUser = (required) => {
 };
 
 exports.isAuthenticated = (req, res, next) => {
-  if (req.user != null) {
+  if (req.user.user != null) {
     next();
     return;
   }
