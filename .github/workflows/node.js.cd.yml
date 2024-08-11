@@ -25,4 +25,5 @@ jobs:
           git pull origin main
           git status
           npm install
+          npm run migrate
           pm2 restart app
