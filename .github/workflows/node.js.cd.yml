@@ -5,7 +5,7 @@ name: Node.js CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
     - name: Deployment
     - uses: appleboy/ssh-action@v1.0.3
       with:
