@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: appleboy/ssh-action@v1.0.3
     - name: Deployment
       with:
         host: ${{ secrets.HOST }}
