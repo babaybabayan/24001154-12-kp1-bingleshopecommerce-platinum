@@ -4,7 +4,7 @@
 name: Node.js CD
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
@@ -12,18 +12,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+    - name: Deployment
+    - uses: appleboy/ssh-action@v1.0.3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SECRET_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ~/projects/24001154-12-kp1-bingleshopecommerce-platinum
+          git pull origin main
+          git status
+          npm install
+          pm2 restart app
