@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Deployment
-    - uses: appleboy/ssh-action@v1.0.3
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
@@ -25,4 +25,5 @@ jobs:
           git pull origin main
           git status
           npm install
+          npm run migrate
           pm2 restart app
