@@ -4,7 +4,9 @@
   "description": "Kelompok 1 Platinum\r - Han\r - Akbar\r - Vieri\r - Aditya",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "start": "nodemon server.js",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migrate": "npx sequelize-cli db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all",
@@ -19,7 +21,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "http-errors": "^2.0.0",
-    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
@@ -36,7 +37,9 @@
   },
   "devDependencies": {
     "express-jwt": "^8.4.1",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.4",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "supertest": "^7.0.0"
   }
 }

@@ -9,7 +9,6 @@ const swaggerRoutes = require("./routes/swaggerRoutes");
 const { signToken } = require("./utils/GenerateToken");
 
 const app = express();
-const PORT = 3000;
 
 app.use(express.json());
 app.use(morgan("combined"));
@@ -20,6 +19,9 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/verification", verificationRoutes);
 app.use("/api/order-detail", orderDetailRoutes);
 app.use("/api/docs", swaggerRoutes);
+
+// test
+app.get("/test", (req, res) => res.send("This App is running properly!"));
 
 // TODO:- WIll delete letter
 app.post("/login", (req, res, next) => {
@@ -34,6 +36,4 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(PORT, function () {
-  console.log(`Server berjalan pada http://localhost:${PORT}`);
-});
+module.exports = app;
