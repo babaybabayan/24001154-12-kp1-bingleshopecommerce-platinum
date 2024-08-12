@@ -18,11 +18,16 @@ const itemHandler = new ItemHandler(itemService, cloudService);
  * @swagger
  * /items:
  *   get:
- *     description: Retrieve the full list of stocks
  *     tags:
- *       - Get All Items
- *     produces:
- *       - application/json
+ *       - Items
+ *     summary: Get All Item
+ *     description: Item List
+ *     parameters:
+ *      - in: path
+ *        name: Authorized
+ *        schema:
+ *          type: string
+ *        required: true
  *     responses:
  *       200:
  *         description: get All Items
@@ -38,11 +43,15 @@ router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
  * /items:
  *  post:
  *    tags:
- *      - Create Item
+ *      - Items
  *    summary: Create Item
  *    description: Create Item
- *    produces:
- *      - application/json
+ *    parameters:
+ *      - in: path
+ *        name: Authorized
+ *        schema:
+ *          type: string
+ *        required: true
  *    requestBody:
  *      required: true
  *      content:
@@ -50,20 +59,32 @@ router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
  *          schema:
  *            type: object
  *            required:
- *              - email
- *              - password
+ *            - name
+ *            - description
+ *            - price
+ *            - stock
+ *            - image_url
  *            properties:
- *              email:
+ *              name:
  *                type: string
- *                default: akbar@gmail.com
- *              password:
+ *                default: item 1
+ *              description:
  *                type: string
- *                default: akbar1234
+ *                default: Description 1
+ *              price:
+ *                type: integer
+ *                default: 5000
+ *              stock:
+ *                type: integer
+ *                default: 5
+ *              image_url:
+ *                type: string
+ *                default: "image"
  *    responses:
  *      200:
  *        description: Successful operation
  *        schema:
- *          $ref: '#/definitions/login'
+ *          $ref: '#/definitions/items'
  */
 router.post(
   "/",
@@ -72,5 +93,7 @@ router.post(
   memoryStorage.single("image"),
   itemHandler.create
 );
+
+router.post("/upload", memoryStorage.single("image"), itemHandler.upload);
 
 module.exports = router;

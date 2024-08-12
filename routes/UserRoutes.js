@@ -31,8 +31,6 @@ router.post("/register", userHandler.register);
  *      - login
  *    summary: Login User
  *    description: Login User
- *    produces:
- *      - application/json
  *    requestBody:
  *      required: true
  *      content:
