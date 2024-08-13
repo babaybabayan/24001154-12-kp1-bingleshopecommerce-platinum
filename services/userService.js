@@ -44,7 +44,6 @@ class UserService {
           email: user.email,
           username: user.username,
           token: generatedToken,
-          role: user.role,
         };
         return { userWithToken };
       } else {
