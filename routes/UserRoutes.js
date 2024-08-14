@@ -43,10 +43,10 @@ router.post("/register", userHandler.register);
  *            properties:
  *              email:
  *                type: string
- *                default: akbar@gmail.com
+ *                default: akbar@binar.com
  *              password:
  *                type: string
- *                default: akbar1234
+ *                default: binar123
  *    responses:
  *      200:
  *        description: Successful operation
