@@ -35,12 +35,15 @@ class ItemHandler {
 
   async create(req, res) {
     const payload = req.body;
-    const cloudinary = await this.cloudService.uploadImage(req);
-    if (cloudinary.status === 200) {
-      payload.imageUrl = cloudinary.image_url.secure_url;
-    }
     const serviceResponse = await this.itemService.create(payload);
     return res.status(serviceResponse.status).send(serviceResponse);
+  }
+
+  async upload(req, res) {
+    const cloudinary = await this.cloudService.uploadImage(req);
+    return res
+      .status(cloudinary.status)
+      .send({ message: cloudinary.message, image_url: cloudinary.image_url });
   }
 }
 

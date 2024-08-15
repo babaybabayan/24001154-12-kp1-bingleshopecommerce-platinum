@@ -33,6 +33,7 @@ class UserService {
       }
       const generatedToken = signToken({
         user: user.username,
+        email: user.email,
         password: hashPassword,
         role: user.role,
       });
@@ -40,9 +41,9 @@ class UserService {
         const userWithToken = {
           status: 200,
           message: "Login Succes",
+          email: user.email,
           username: user.username,
           token: generatedToken,
-          role: user.role,
         };
         return { userWithToken };
       } else {

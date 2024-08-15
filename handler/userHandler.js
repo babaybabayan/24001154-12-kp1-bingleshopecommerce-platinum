@@ -11,7 +11,7 @@ class UserHandler {
   async login(req, res) {
     const { username, email, password } = req.body;
     const login = await this.userService.login(username, email, password);
-    res.json({ login });
+    res.json({ userWithToken: login.userWithToken });
   }
 
   async register(req, res) {

@@ -18,21 +18,74 @@ const itemHandler = new ItemHandler(itemService, cloudService);
  * @swagger
  * /items:
  *   get:
- *     description: Retrieve the full list of stocks
  *     tags:
- *       - Get All Items
- *     produces:
- *       - application/json
+ *       - Items
+ *     summary: Get All Item
+ *     description: Item List
+ *     parameters:
+ *      - in: path
+ *        name: Authorized
+ *        schema:
+ *          type: string
+ *        required: true
  *     responses:
  *       200:
  *         description: get All Items
  *         schema:
  *           $ref: '#/definitions/items'
  */
-router.get("/", mustBeAuthenticated, itemHandler.getAllItem);
+router.get("/", itemHandler.getAllItem);
 router.get("/:id", mustBeAuthenticated, itemHandler.getItemById);
 router.put("/:id", mustBeAuthenticated, isAdmin, itemHandler.update);
 router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
+/**
+ * @swagger
+ * /items:
+ *  post:
+ *    tags:
+ *      - Items
+ *    summary: Create Item
+ *    description: Create Item
+ *    parameters:
+ *      - in: path
+ *        name: Authorized
+ *        schema:
+ *          type: string
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *            - name
+ *            - description
+ *            - price
+ *            - stock
+ *            - image_url
+ *            properties:
+ *              name:
+ *                type: string
+ *                default: item 1
+ *              description:
+ *                type: string
+ *                default: Description 1
+ *              price:
+ *                type: integer
+ *                default: 5000
+ *              stock:
+ *                type: integer
+ *                default: 5
+ *              image_url:
+ *                type: string
+ *                default: "image"
+ *    responses:
+ *      200:
+ *        description: Successful operation
+ *        schema:
+ *          $ref: '#/definitions/items'
+ */
 router.post(
   "/",
   mustBeAuthenticated,
@@ -40,5 +93,7 @@ router.post(
   memoryStorage.single("image"),
   itemHandler.create
 );
+
+router.post("/upload", memoryStorage.single("image"), itemHandler.upload);
 
 module.exports = router;

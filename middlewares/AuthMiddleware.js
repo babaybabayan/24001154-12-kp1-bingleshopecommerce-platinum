@@ -10,11 +10,18 @@ const { verifyToken } = require("../utils/VerifyToken");
 const readToken = async (req, res, next) => {
   // if the loadoUser middleware has already laoded the user then no need to reload it again
   const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res
+      .status(401)
+      .json(
+        AppResponseDto.buildWithErrorMessages("authentication require", 401)
+      );
+  }
   const isHaveBearer = req.headers.authorization.split(" ")[0] === "Bearer";
   const token = req.headers.authorization.split(" ")[1];
 
   if (req.user != null) return next();
-  if (authHeader && isHaveBearer) {
+  if (isHaveBearer) {
     try {
       const verifyUser = await verifyToken(token, process.env.JWT_SECRET_KEY);
       req.user = verifyUser;
@@ -31,7 +38,7 @@ const readToken = async (req, res, next) => {
 
 const getFreshUser = (required) => {
   return (req, res, next) => {
-    if (req.user == null || req.user.email == null) {
+    if (req.user.user == null || req.user.email == null) {
       if (required)
         // no jwt, and it is required
         return res.json(
@@ -70,7 +77,7 @@ const getFreshUser = (required) => {
 };
 
 exports.isAuthenticated = (req, res, next) => {
-  if (req.user != null) {
+  if (req.user.user != null) {
     next();
     return;
   }

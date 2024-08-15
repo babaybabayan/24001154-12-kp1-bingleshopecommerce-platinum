@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const bodyParser = require("body-parser");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const swaggerModelValidator = require("swagger-model-validator");
@@ -24,7 +23,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000/api/",
+        url: "http://202.10.36.216/api/",
       },
     ],
   },
