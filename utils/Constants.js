@@ -7,7 +7,7 @@ exports.USER_ROLE = {
 exports.STATUS = {
   success: "SUCCESS",
   inProgress: "INPROGRESS",
-  pending: "FAILED",
+  pending: "PENDING",
 };
 
 exports.STATUS_UPLOAD = {

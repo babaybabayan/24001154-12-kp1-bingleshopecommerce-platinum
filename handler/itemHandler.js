@@ -42,10 +42,7 @@ class ItemHandler {
 
   async upload(req, res) {
     const cloudinary = await this.cloudService.uploadImage(req);
-    return res.status(cloudinary.status).send({
-      message: cloudinary.message,
-      image_url: cloudinary.image_url.url,
-    });
+    return res.status(cloudinary.status).send(cloudinary);
   }
 }
 

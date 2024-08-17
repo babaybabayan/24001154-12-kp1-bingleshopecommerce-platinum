@@ -1,8 +1,9 @@
 const { OrderDetail, Order, Item, user } = require("../models");
 
 class OrderDetailRepository {
-  async getOrder() {
+  async getOrder(userId) {
     return await OrderDetail.findAll({
+      where: { userId: userId },
       include: [
         { model: user },
         {
@@ -15,7 +16,7 @@ class OrderDetailRepository {
   }
 
   async getOrderBy(transactionId) {
-    return await OrderDetail.findOne({
+    return await OrderDetail.findAll({
       where: transactionId,
       include: [
         { model: user },
@@ -26,6 +27,10 @@ class OrderDetailRepository {
         },
       ],
     });
+  }
+
+  async create(payload) {
+    return await OrderDetail.create(payload);
   }
 
   async insert(payload) {
