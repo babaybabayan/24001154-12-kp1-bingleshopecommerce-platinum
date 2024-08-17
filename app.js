@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const path = require("path");
 const itemRoutes = require("./routes/ItemRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const orderRoutes = require("./routes/OrderRoutes");
@@ -13,6 +14,9 @@ const app = express();
 app.use(express.json());
 app.use(morgan("combined"));
 
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "./views/index.html"));
+});
 app.use("/api/users", userRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/orders", orderRoutes);
@@ -30,10 +34,7 @@ app.post("/login", (req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.status(404).send({
-    status: "fail",
-    message: "not found",
-  });
+  res.sendFile(path.join(__dirname, "./views/controller/404.html"));
 });
 
 module.exports = app;

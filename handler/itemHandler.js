@@ -7,6 +7,7 @@ class ItemHandler {
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
     this.create = this.create.bind(this);
+    this.upload = this.upload.bind(this);
   }
 
   async getAllItem(req, res) {
@@ -41,9 +42,10 @@ class ItemHandler {
 
   async upload(req, res) {
     const cloudinary = await this.cloudService.uploadImage(req);
-    return res
-      .status(cloudinary.status)
-      .send({ message: cloudinary.message, image_url: cloudinary.image_url });
+    return res.status(cloudinary.status).send({
+      message: cloudinary.message,
+      image_url: cloudinary.image_url.url,
+    });
   }
 }
 
