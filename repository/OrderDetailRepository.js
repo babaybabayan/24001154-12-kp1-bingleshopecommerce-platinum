@@ -8,7 +8,7 @@ class OrderDetailRepository {
         {
           model: Order,
           as: "orders",
-          include: { model: Item, right: true, as: "item" },
+          include: { model: Item, left: true, as: "item" },
         },
       ],
     });

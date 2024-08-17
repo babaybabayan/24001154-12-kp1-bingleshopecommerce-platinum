@@ -22,12 +22,6 @@ const itemHandler = new ItemHandler(itemService, cloudService);
  *       - Items
  *     summary: Get All Item
  *     description: Item List
- *     parameters:
- *      - in: path
- *        name: Authorized
- *        schema:
- *          type: string
- *        required: true
  *     responses:
  *       200:
  *         description: get All Items
@@ -86,13 +80,7 @@ router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
  *        schema:
  *          $ref: '#/definitions/items'
  */
-router.post(
-  "/",
-  mustBeAuthenticated,
-  isAdmin,
-  memoryStorage.single("image"),
-  itemHandler.create
-);
+router.post("/", mustBeAuthenticated, isAdmin, itemHandler.create);
 
 router.post("/upload", memoryStorage.single("image"), itemHandler.upload);
 
