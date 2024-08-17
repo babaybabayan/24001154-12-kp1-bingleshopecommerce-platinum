@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1752YPLP7H"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-1752YPLP7H");
+    </script>
+
+    <title>Controller | tsParticles 404</title>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <style>
+      body {
+        background-color: #000000;
+        font-family: Arial, Helvetica, sans-serif;
+        height: 100vh;
+        z-index: -999;
+        overflow: hidden;
+      }
+
+      #backdrop {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(3px);
+        z-index: 1;
+        color: #ffffff;
+      }
+
+      #text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      h1 {
+        background-color: #ffffff;
+        font-size: 12rem;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(90deg, #f8ff00 0%, #3ad59f 100%);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+      }
+
+      p {
+        font-size: 2rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+
+      a:visited {
+        color: rgb(104, 104, 104);
+      }
+    </style>
+    <link rel="icon" type="image/x-icon" href="./images/tsParticles-64.png" />
+  </head>
+
+  <body>
+    <div id="tsparticles"></div>
+    <div id="backdrop">
+      <div id="text">
+        <h1>404</h1>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
