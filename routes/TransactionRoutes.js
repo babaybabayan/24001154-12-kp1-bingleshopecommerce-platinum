@@ -1,21 +1,25 @@
 const router = require("express").Router();
-const { mustBeAuthenticated } = require("../middlewares/AuthMiddleware");
 const OrderDetailRepository = require("../repository/OrderDetailRepository");
-const ItemDetailRepository = require("../repository/itemRepository");
+const CartRepository = require("../repository/cartRepository");
+const OrderRepository = require("../repository/orderRepository");
 const TransactionService = require("../services/transactionService");
 const TransactionHandler = require("../handler/transactionHandler");
+const { mustBeAuthenticated } = require("../middlewares/AuthMiddleware");
 const { isAdmin } = require("../middlewares/RoleMiddleware");
 
+const cartRepository = new CartRepository();
 const orderDetailRepository = new OrderDetailRepository();
-const itemRepository = new ItemDetailRepository();
+const orderRepository = new OrderRepository();
 const transactionService = new TransactionService(
   orderDetailRepository,
-  itemRepository
+  cartRepository,
+  orderRepository
 );
 const transactionHandler = new TransactionHandler(transactionService);
 
-router.get("/", mustBeAuthenticated, isAdmin, transactionHandler.index);
-router.post("/", mustBeAuthenticated, transactionHandler.create);
+router.get("/", mustBeAuthenticated, transactionHandler.index);
+router.post("/create", mustBeAuthenticated, transactionHandler.create);
+router.post("/status", mustBeAuthenticated, transactionHandler.getOrderBy);
 router.post(
   "/execution",
   mustBeAuthenticated,
