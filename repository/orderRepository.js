@@ -29,15 +29,8 @@ class OrderRepository {
     return await Order.destroy({ where: { id } });
   }
 
-  async create(orderData) {
-    const { user_id, item_id, quantity, total_price, status } = orderData;
-    return await Order.create({
-      user_id,
-      item_id,
-      quantity,
-      total_price,
-      status,
-    });
+  async create(payload) {
+    return await Order.bulkCreate(payload);
   }
 }
 

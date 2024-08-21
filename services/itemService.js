@@ -1,6 +1,5 @@
 const { buildItem } = require("../dtos/reponse/ItemResponseDto");
 const ItemDto = require("../dtos/request/ItemRequestDto");
-var _ = require("lodash");
 
 class ItemService {
   constructor(itemRepository) {

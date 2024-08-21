@@ -22,20 +22,34 @@ const itemHandler = new ItemHandler(itemService, cloudService);
  *       - Items
  *     summary: Get All Item
  *     description: Item List
- *     parameters:
- *      - in: path
- *        name: Authorized
- *        schema:
- *          type: string
- *        required: true
  *     responses:
  *       200:
  *         description: get All Items
  *         schema:
  *           $ref: '#/definitions/items'
  */
-router.get("/", itemHandler.getAllItem);
-router.get("/:id", mustBeAuthenticated, itemHandler.getItemById);
+router.get("/", mustBeAuthenticated, itemHandler.getAllItem);
+/**
+ * @swagger
+ * /items/{itemId}:
+ *   get:
+ *     tags:
+ *       - Items
+ *     summary: Get Item By Id
+ *     description: Get Item By Id
+ *     parameters:
+ *      - in: path
+ *        name: itemId
+ *        schema:
+ *          type: integer
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Get Item By Id
+ *         schema:
+ *           $ref: '#/definitions/items'
+ */
+router.get("/:id", itemHandler.getItemById);
 router.put("/:id", mustBeAuthenticated, isAdmin, itemHandler.update);
 router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
 /**
@@ -86,14 +100,26 @@ router.delete("/:id", mustBeAuthenticated, isAdmin, itemHandler.delete);
  *        schema:
  *          $ref: '#/definitions/items'
  */
-router.post(
-  "/",
-  mustBeAuthenticated,
-  isAdmin,
-  memoryStorage.single("image"),
-  itemHandler.create
-);
-
+router.post("/", mustBeAuthenticated, isAdmin, itemHandler.create);
+/**
+ * @swagger
+ * /items/upload:
+ *   post:
+ *     tags:
+ *       - Items
+ *     summary: Upload Item
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             description: The file to upload.
+ *             type: string
+ *             format: binary
+ *     responses:
+ *       200:
+ *         description: Media uploaded successfully
+ */
 router.post("/upload", memoryStorage.single("image"), itemHandler.upload);
 
 module.exports = router;

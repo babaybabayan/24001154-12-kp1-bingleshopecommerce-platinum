@@ -13,9 +13,9 @@ class CloudinaryService {
       if (uploadedFile === STATUS_UPLOAD.notDefine) {
         return { status: 500, message: uploadedFile };
       }
-      return { status: 200, image_url: uploadedFile };
+      return { status: 200, image_url: uploadedFile.url };
     } catch (error) {
-      return { status: 500, message: error.message };
+      return { status: 500, message: error };
     }
   }
 }

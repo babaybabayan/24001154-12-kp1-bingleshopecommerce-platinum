@@ -32,6 +32,7 @@ class UserService {
         return { status: 409, message: "Wrong password" };
       }
       const generatedToken = signToken({
+        userId: user.id,
         user: user.username,
         email: user.email,
         password: hashPassword,
